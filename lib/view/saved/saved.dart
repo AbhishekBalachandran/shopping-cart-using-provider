@@ -4,9 +4,11 @@ import 'package:provider_task/model/models.dart';
 import 'package:provider_task/provider/provider.dart';
 import 'package:provider_task/utils/color_constant/color_constant.dart';
 import 'package:provider_task/utils/textstyle_constants/textstyle_constants.dart';
+import 'package:provider_task/view/detail_screen/detail_screen.dart';
 
 class Saved extends StatelessWidget {
-  const Saved({super.key});
+  final int? itemIndex;
+  const Saved({super.key,  this.itemIndex});
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +35,11 @@ class Saved extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => DetailScreen(itemIndex: provider),
-                    //     ));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailScreen(itemIndex: itemIndex ?? 0),
+                        ));
                   },
                   child: Container(
                     height: 400,

@@ -4,7 +4,7 @@ import 'package:provider_task/model/models.dart';
 class ShoppingAppProvider with ChangeNotifier {
   int itemCount = 1;
   int? total;
-  bool? isSaved;
+  bool? isSaved =false;
   bool isCartContains = false;
   bool isSavedContains = false;
   List<CartModel> cartItems = [];
@@ -81,7 +81,7 @@ class ShoppingAppProvider with ChangeNotifier {
     if (alreadySavedItems.isEmpty) {
       savedItems.add(SavedModel(itemIndex: index));
     } else {
-      null;
+      removeSaved(index);
     }
     notifyListeners();  
   }
@@ -91,14 +91,12 @@ class ShoppingAppProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  isSavedList(index)  { 
+  bool isSavedList(index)  { 
     Iterable<SavedModel> alreadySavedItems =
         savedItems.where((element) => element.itemIndex == index);
-    if (alreadySavedItems.isEmpty) {
-      isSaved = false;
-    } else {  
-      isSaved = true;
+    if(alreadySavedItems.isEmpty) {
+      return false;
     }
-    print(isSaved.toString());
+    return true;
   }
 }

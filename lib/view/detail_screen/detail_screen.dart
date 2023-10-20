@@ -97,10 +97,33 @@ class _DetailScreenState extends State<DetailScreen> {
                           color: ColorConstant.backgroundColor,
                           borderRadius: BorderRadius.circular(5)),
                       child: Center(
-                          child: Icon(
-                        Icons.favorite_outline,
-                        size: 30,
-                      )),
+                        child: IconButton(
+                            onPressed: () {
+                              Provider.of<ShoppingAppProvider>(context,
+                                      listen: false)
+                                  .onTapSave(widget.itemIndex);
+                              const snackBar1 = SnackBar(
+                                content: Text('Item saved successfully.'),
+                                backgroundColor: Colors.black,
+                              );
+                              const snackBar2 = SnackBar(
+                                content: Text('Item removed from saved.'),
+                                backgroundColor: Colors.black,
+                              );
+                              ScaffoldMessenger.of(context).clearSnackBars();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  context.read<ShoppingAppProvider>().isSavedList ==
+                                      true
+                                      ? snackBar1
+                                      : snackBar2);
+                            },
+                            icon: Icon(
+                              context.watch<ShoppingAppProvider>().isSavedList ==
+                                      true
+                                  ? Icons.favorite
+                                  : Icons.favorite_outline,
+                            )),
+                      ),
                     ),
                     SizedBox(
                       width: 20,
@@ -137,11 +160,11 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Text(
                       '₹${Provider.of<ShoppingAppProvider>(context).totalPrice(itemPrice, provider.itemCount)}',
                       style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+                          TextStyle(fontSize: 28, fontWeight: FontWeight.w600),
                     ),
                   ),
                 ],
@@ -175,7 +198,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
                     Container(
                       height: 40,
-                      width: 80,
+                      width: 60,
                       decoration:
                           BoxDecoration(color: ColorConstant.primaryTextColor),
                       child: Center(
@@ -316,7 +339,9 @@ class _DetailScreenState extends State<DetailScreen> {
                     ),
             ],
           ),
-          SizedBox(height: 40,),
+          SizedBox(
+            height: 40,
+          ),
         ]),
       ),
     );

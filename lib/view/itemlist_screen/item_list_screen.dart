@@ -154,28 +154,30 @@ class ItemListScreen extends StatelessWidget {
                                                 BorderRadius.circular(5)),
                                         child: Center(
                                           child: IconButton(
-                                              onPressed: () {
-                                                Provider.of<ShoppingAppProvider>(
-                                                        context,
-                                                        listen: false)
-                                                    .onTapSave(index);
-                                                const snackBar = SnackBar(
-                                                  content: Text(
-                                                      'Item saved successfully.'),
-                                                  backgroundColor: Colors.black,
-                                                );
-                                                ScaffoldMessenger.of(context).clearSnackBars();
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(snackBar);
-                                              },
-                                              icon: Icon(
-                                                Provider.of<ShoppingAppProvider>(
-                                                                context)
-                                                            .isSaved ==
-                                                        true
-                                                    ? Icons.favorite
-                                                    : Icons.favorite_outline,
-                                              )),
+                                            onPressed: () {
+                                              Provider.of<ShoppingAppProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .onTapSave(index);
+                                              const snackBar = SnackBar(
+                                                content: Text(
+                                                    'Item saved successfully.'),
+                                                backgroundColor: Colors.black,
+                                              );
+                                              ScaffoldMessenger.of(context)
+                                                  .clearSnackBars();
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(snackBar);
+                                            },
+                                            icon: Icon(
+                                              Provider.of<ShoppingAppProvider>(
+                                                              context)
+                                                          .isSaved ==
+                                                      true
+                                                  ? Icons.favorite
+                                                  : Icons.favorite_outline,
+                                            ),
+                                          ),
                                         ),
                                       )
                                     ],
